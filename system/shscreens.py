@@ -35,7 +35,6 @@ GrayColor = UIColor.colorWithRed_green_blue_alpha_(0.5, 0.5, 0.5, 1.0)
 YellowColor = UIColor.yellowColor()
 SmokeColor = UIColor.colorWithRed_green_blue_alpha_(0.8, 0.8, 0.8, 1.0)
 
-
 class ShScreenNotLocked(Exception):
     pass
 
@@ -655,7 +654,6 @@ class ShSequentialRenderer(object):
     def _build_attributes(self, attrs):
         return {
             'NSColor': self.FG_COLORS.get(attrs.fg, WhiteColor),
-            'NSBackgroundColor': self.BG_COLORS.get(attrs.bg, BlackColor),
             'NSFont': self._get_font(attrs),
             'NSUnderline': 1 if attrs.underscore else 0,
             'NSStrikethrough': 1 if attrs.strikethrough else 0,
