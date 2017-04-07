@@ -68,35 +68,39 @@ class ShUI(ui.View):
         self.is_editing = False
 
         self.BUFFER_MAX = stash.config.getint('display', 'BUFFER_MAX')
-        self.TEXT_FONT = ('Menlo-Regular', stash.config.get('display', 'TEXT_FONT_SIZE'))
+        self.TEXT_FONT = ('Menlo-Regular', stash.config.getint('display', 'TEXT_FONT_SIZE'))
         self.BUTTON_FONT = ('Menlo-Regular', stash.config.getint('display', 'BUTTON_FONT_SIZE'))
-
+    
         self.vk_symbols = stash.config.get('display', 'VK_SYMBOLS')
 
+        k_hspacing = 1
+        k_vk_background_color = 1.0
+        k_button_border_color = 0.5
+        k_button_border_width = 0.5
+        k_button_corner_radius = 5
+        
         # Start constructing the view's layout
         self.name = 'StaSh'
         self.flex = 'WH'
-        self.background_color = 0.0
+        self.background_color = k_vk_background_color
 
         self.txts = ui.View(name='txts', flex='WH')  # Wrapper view of output and input areas
         self.add_subview(self.txts)
-        self.txts.background_color = 0.7
+        self.txts.background_color = k_vk_background_color
 
         # TODO: The accessory keys can be moved to a separate class
         self.vks = ShVk(stash, name='vks', flex='WT')
         self.vks.sv.delegate = self.stash.user_action_proxy.sv_delegate
         self.txts.add_subview(self.vks)
-        self.vks.background_color = 0.7
-
-        k_hspacing = 1
+        self.vks.background_color = k_vk_background_color
 
         self.k_tab = ui.Button(name='k_tab', title=' Tab ', flex='TB')
         self.vks.add_subview(self.k_tab)
         self.k_tab.action = self.stash.user_action_proxy.vk_tapped
         self.k_tab.font = self.BUTTON_FONT
-        self.k_tab.border_width = 1
-        self.k_tab.border_color = 0.9
-        self.k_tab.corner_radius = 5
+        self.k_tab.border_width = k_button_border_width
+        self.k_tab.border_color = k_button_border_color
+        self.k_tab.corner_radius = k_button_corner_radius
         self.k_tab.tint_color = 'black'
         self.k_tab.background_color = 'white'
         self.k_tab.size_to_fit()
@@ -104,16 +108,16 @@ class ShUI(ui.View):
         self.k_grp_0 = ShVk(stash, name='k_grp_0', flex='WT')  # vk group 0
         self.k_grp_0.sv.delegate = self.stash.user_action_proxy.sv_delegate
         self.vks.add_subview(self.k_grp_0)
-        self.k_grp_0.background_color = 0.7
+        self.k_grp_0.background_color = k_vk_background_color
         self.k_grp_0.x = self.k_tab.width + k_hspacing
 
         self.k_hist = ui.Button(name='k_hist', title=' H ', flex='RTB')
         self.k_grp_0.add_subview(self.k_hist)
         self.k_hist.action = self.stash.user_action_proxy.vk_tapped
         self.k_hist.font = self.BUTTON_FONT
-        self.k_hist.border_width = 1
-        self.k_hist.border_color = 0.9
-        self.k_hist.corner_radius = 5
+        self.k_hist.border_width = k_button_border_width
+        self.k_hist.border_color = k_button_border_color
+        self.k_hist.corner_radius = k_button_corner_radius
         self.k_hist.tint_color = 'black'
         self.k_hist.background_color = 'white'
         self.k_hist.size_to_fit()
@@ -122,9 +126,9 @@ class ShUI(ui.View):
         self.k_grp_0.add_subview(self.k_hup)
         self.k_hup.action = self.stash.user_action_proxy.vk_tapped
         self.k_hup.font = self.BUTTON_FONT
-        self.k_hup.border_width = 1
-        self.k_hup.border_color = 0.9
-        self.k_hup.corner_radius = 5
+        self.k_hup.border_width = k_button_border_width
+        self.k_hup.border_color = k_button_border_color
+        self.k_hup.corner_radius = k_button_corner_radius
         self.k_hup.tint_color = 'black'
         self.k_hup.background_color = 'white'
         self.k_hup.size_to_fit()
@@ -134,9 +138,9 @@ class ShUI(ui.View):
         self.k_grp_0.add_subview(self.k_hdn)
         self.k_hdn.action = self.stash.user_action_proxy.vk_tapped
         self.k_hdn.font = self.BUTTON_FONT
-        self.k_hdn.border_width = 1
-        self.k_hdn.border_color = 0.9
-        self.k_hdn.corner_radius = 5
+        self.k_hdn.border_width = k_button_border_width
+        self.k_hdn.border_color = k_button_border_color
+        self.k_hdn.corner_radius = k_button_corner_radius
         self.k_hdn.tint_color = 'black'
         self.k_hdn.background_color = 'white'
         self.k_hdn.size_to_fit()
@@ -146,9 +150,9 @@ class ShUI(ui.View):
         self.k_grp_0.add_subview(self.k_CD)
         self.k_CD.action = self.stash.user_action_proxy.vk_tapped
         self.k_CD.font = self.BUTTON_FONT
-        self.k_CD.border_width = 1
-        self.k_CD.border_color = 0.9
-        self.k_CD.corner_radius = 5
+        self.k_CD.border_width = k_button_border_width
+        self.k_CD.border_color = k_button_border_color
+        self.k_CD.corner_radius = k_button_corner_radius
         self.k_CD.tint_color = 'black'
         self.k_CD.background_color = 'white'
         self.k_CD.size_to_fit()
@@ -158,9 +162,9 @@ class ShUI(ui.View):
         self.k_grp_0.add_subview(self.k_CC)
         self.k_CC.action = self.stash.user_action_proxy.vk_tapped
         self.k_CC.font = self.BUTTON_FONT
-        self.k_CC.border_width = 1
-        self.k_CC.border_color = 0.9
-        self.k_CC.corner_radius = 5
+        self.k_CC.border_width = k_button_border_width
+        self.k_CC.border_color = k_button_border_color
+        self.k_CC.corner_radius = k_button_corner_radius
         self.k_CC.tint_color = 'black'
         self.k_CC.background_color = 'white'
         self.k_CC.size_to_fit()
@@ -171,9 +175,9 @@ class ShUI(ui.View):
         self.k_grp_0.add_subview(self.k_CU)
         self.k_CU.action = self.stash.user_action_proxy.vk_tapped
         self.k_CU.font = self.BUTTON_FONT
-        self.k_CU.border_width = 1
-        self.k_CU.border_color = 0.9
-        self.k_CU.corner_radius = 5
+        self.k_CU.border_width = k_button_border_width
+        self.k_CU.border_color = k_button_border_color
+        self.k_CU.corner_radius = k_button_corner_radius
         self.k_CU.tint_color = 'black'
         self.k_CU.background_color = 'white'
         self.k_CU.size_to_fit()
@@ -184,9 +188,9 @@ class ShUI(ui.View):
         self.k_grp_0.add_subview(self.k_CZ)
         self.k_CZ.action = self.stash.user_action_proxy.vk_tapped
         self.k_CZ.font = self.BUTTON_FONT
-        self.k_CZ.border_width = 1
-        self.k_CZ.border_color = 0.9
-        self.k_CZ.corner_radius = 5
+        self.k_CZ.border_width = k_button_border_width
+        self.k_CZ.border_color = k_button_border_color
+        self.k_CZ.corner_radius = k_button_corner_radius
         self.k_CZ.tint_color = 'black'
         self.k_CZ.background_color = 'white'
         self.k_CZ.size_to_fit()
@@ -197,9 +201,9 @@ class ShUI(ui.View):
         self.k_grp_0.add_subview(self.k_KB)
         self.k_KB.action = self.stash.user_action_proxy.vk_tapped
         self.k_KB.font = self.BUTTON_FONT
-        self.k_KB.border_width = 1
-        self.k_KB.border_color = 0.9
-        self.k_KB.corner_radius = 5
+        self.k_KB.border_width = k_button_border_width
+        self.k_KB.border_color = k_button_border_color
+        self.k_KB.corner_radius = k_button_corner_radius
         self.k_KB.tint_color = 'black'
         self.k_KB.background_color = 'white'
         self.k_KB.size_to_fit()
@@ -209,9 +213,9 @@ class ShUI(ui.View):
         self.vks.add_subview(self.k_swap)
         self.k_swap.action = self.stash.user_action_proxy.vk_tapped
         self.k_swap.font = self.BUTTON_FONT
-        self.k_swap.border_width = 1
-        self.k_swap.border_color = 0.9
-        self.k_swap.corner_radius = 5
+        self.k_swap.border_width = k_button_border_width
+        self.k_swap.border_color = k_button_border_color
+        self.k_swap.corner_radius = k_button_corner_radius
         self.k_swap.tint_color = 'black'
         self.k_swap.background_color = 'white'
         self.k_swap.size_to_fit()
@@ -221,7 +225,7 @@ class ShUI(ui.View):
         self.k_grp_1 = ShVk(stash, name='k_grp_1', flex='WT')  # vk group 1
         self.k_grp_1.sv.delegate = self.stash.user_action_proxy.sv_delegate
         self.vks.add_subview(self.k_grp_1)
-        self.k_grp_1.background_color = 0.7
+        self.k_grp_1.background_color = k_vk_background_color
         self.k_grp_1.x = self.k_tab.width + k_hspacing
 
         offset = 0
@@ -235,9 +239,9 @@ class ShUI(ui.View):
             self.k_grp_1.add_subview(k_sym)
             k_sym.action = self.stash.user_action_proxy.vk_tapped
             k_sym.font = self.BUTTON_FONT
-            k_sym.border_width = 1
-            k_sym.border_color = 0.9
-            k_sym.corner_radius = 5
+            k_sym.border_width = k_button_border_width
+            k_sym.border_color = k_button_border_color
+            k_sym.corner_radius = k_button_corner_radius
             k_sym.tint_color = 'black'
             k_sym.background_color = 'white'
             k_sym.size_to_fit()
